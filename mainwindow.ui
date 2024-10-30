@@ -85,6 +85,7 @@
     <property name="title">
      <string>帮助(&amp;H)</string>
     </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu"/>
    <addaction name="menu_E"/>
@@ -404,6 +405,20 @@
    </property>
    <property name="toolTip">
     <string>退出</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset theme="QIcon::ThemeIcon::HelpAbout"/>
+   </property>
+   <property name="text">
+    <string>关于(&amp;A)</string>
+   </property>
+   <property name="toolTip">
+    <string>关于</string>
    </property>
    <property name="menuRole">
     <enum>QAction::MenuRole::NoRole</enum>
