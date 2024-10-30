@@ -54,12 +54,18 @@
                 <property name="text">
                  <string>向上(&amp;U)</string>
                 </property>
+                <property name="checked">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QRadioButton" name="rbDown">
                 <property name="text">
                  <string>向下(&amp;D)</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -75,9 +81,9 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QPushButton" name="btnCancel">
+        <widget class="QPushButton" name="btnNext">
          <property name="text">
-          <string>取消</string>
+          <string>查找下一个(&amp;F)</string>
          </property>
         </widget>
        </item>
@@ -95,9 +101,9 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="btnNext">
+        <widget class="QPushButton" name="btnCancel">
          <property name="text">
-          <string>查找下一个(&amp;F)</string>
+          <string>取消</string>
          </property>
         </widget>
        </item>

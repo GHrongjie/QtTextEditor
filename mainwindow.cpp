@@ -6,6 +6,8 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QTextStream>
+#include <QColorDialog>
+#include <QFontDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -31,6 +33,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionPaste->setEnabled(false);
     ui->actionUndo->setEnabled(false);
     ui->actionRedo->setEnabled(false);
+    ui->actiontoolsbar->setChecked(true);
+    ui->actiontoolsbar->setChecked(true);
+
+    QPlainTextEdit::LineWrapMode mode = ui->textEditor->lineWrapMode();
+
+    if(mode == QTextEdit::NoWrap){
+        ui->textEditor->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+        ui->actionLineWrap->setChecked(false);
+    }else{
+        ui->textEditor->setLineWrapMode(QPlainTextEdit::NoWrap);
+        ui->actionLineWrap->setChecked(true);
+    }
 }
 
 MainWindow::~MainWindow()
@@ -47,14 +61,14 @@ void MainWindow::on_actionAbout_triggered()
 
 void MainWindow::on_actionFind_triggered()
 {
-    SearchDialog dig;
+    SearchDialog dig(this,ui->textEditor);
     dig.exec();
 }
 
 
 void MainWindow::on_actionReplace_triggered()
 {
-    ReplaceDialog dig;
+    ReplaceDialog dig(this,ui->textEditor);
     dig.exec();
 
 }
@@ -228,5 +242,85 @@ void MainWindow::on_textEditor_redoAvailable(bool b)
 void MainWindow::on_textEditor_undoAvailable(bool b)
 {
     ui->actionUndo->setEnabled(b);
+}
+
+
+void MainWindow::on_actionFontColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black,this,"选择颜色");
+    if(color.isValid()){
+        ui->textEditor->setStyleSheet(QString("QPlainTextEdit {color: %1}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_actionFontBackgroundColor_triggered()
+{
+
+}
+
+
+void MainWindow::on_actionBackgroundColor_triggered()
+{
+    QColor color = QColorDialog::getColor(Qt::black,this,"选择颜色");
+    if(color.isValid()){
+        ui->textEditor->setStyleSheet(QString("QPlainTextEdit {background-color: %1}").arg(color.name()));
+    }
+}
+
+
+void MainWindow::on_actionLineWrap_triggered()
+{
+    QPlainTextEdit::LineWrapMode mode = ui->textEditor->lineWrapMode();
+
+    if(mode == QTextEdit::NoWrap){
+        ui->textEditor->setLineWrapMode(QPlainTextEdit::WidgetWidth);
+
+        ui->actionLineWrap->setChecked(true);
+    }else{
+        ui->textEditor->setLineWrapMode(QPlainTextEdit::NoWrap);
+
+        ui->actionLineWrap->setChecked(false);
+    }
+}
+
+
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok=false;
+    QFont font = QFontDialog::getFont(&ok,this);
+
+    if(ok){
+        ui->textEditor->setFont(font);
+    }
+}
+
+
+void MainWindow::on_actiontoolsbar_triggered()
+{
+    bool visable = ui->toolBar->isVisible();
+    ui->toolBar->setVisible(!visable);
+    ui->actiontoolsbar->setChecked(!visable);
+}
+
+
+void MainWindow::on_actionStatebar_triggered()
+{
+    bool visable = ui->statusbar->isVisible();
+    ui->statusbar->setVisible(!visable);
+    ui->actionStatebar->setChecked(!visable);
+}
+
+
+void MainWindow::on_actionSelectAll_triggered()
+{
+    ui->textEditor->selectAll();
+}
+
+
+void MainWindow::on_actionExit_triggered()
+{
+    if(userEdiitConfirmed())
+        exit(0);
 }
 

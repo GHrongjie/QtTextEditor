@@ -90,16 +90,19 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
-               <widget class="QRadioButton" name="btnUp">
+               <widget class="QRadioButton" name="rbUp">
                 <property name="text">
                  <string>向上(&amp;U)</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QRadioButton" name="btnDown">
+               <widget class="QRadioButton" name="rbDown">
                 <property name="text">
                  <string>向下(&amp;D)</string>
+                </property>
+                <property name="checked">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -122,13 +125,6 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="btnCancel">
-         <property name="text">
-          <string>取消</string>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="btnReplace">
          <property name="text">
           <string>替换</string>
@@ -139,6 +135,13 @@
         <widget class="QPushButton" name="btnReplaceAll">
          <property name="text">
           <string>全部替换</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnCancel">
+         <property name="text">
+          <string>取消</string>
          </property>
         </widget>
        </item>
