@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     textChanged=false;
     on_actionNew_triggered();
-    statusLabel.setMaximumWidth(150);
+    statusLabel.setMaximumWidth(200);
     statusLabel.setText("length："+QString::number(0)+"    lines："+QString::number(1));
     ui->statusbar->addPermanentWidget(&statusLabel);
 
@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionRedo->setEnabled(false);
     ui->actiontoolsbar->setChecked(true);
     ui->actiontoolsbar->setChecked(true);
+    ui->actionShowLineNumber->setChecked(true);
 
     QPlainTextEdit::LineWrapMode mode = ui->textEditor->lineWrapMode();
 
@@ -127,6 +128,9 @@ void MainWindow::on_actionSave_triggered()
     }
 
     QFile file(filePath);
+    if(!file.open(QFile::WriteOnly| QFile::Text)){
+        return;
+    }
 
     QTextStream out(&file);
     QString text =ui->textEditor->toPlainText();
@@ -165,6 +169,8 @@ void MainWindow::on_textEditor_textChanged()
         this->setWindowTitle("*"+this->windowTitle());
         textChanged=true;
     }
+    statusLabel.setText("length："+QString::number(ui->textEditor->toPlainText().length())+
+                        "    lines："+QString::number(ui->textEditor->document()->lineCount()));
 }
 
 bool MainWindow::userEdiitConfirmed()
@@ -322,5 +328,35 @@ void MainWindow::on_actionExit_triggered()
 {
     if(userEdiitConfirmed())
         exit(0);
+}
+
+
+void MainWindow::on_textEditor_cursorPositionChanged()
+{
+    int col=0;
+    int ln=0;
+    int flg=-1;
+    int pos = ui->textEditor->textCursor().position();
+
+    QString text = ui->textEditor->toPlainText();
+
+    for(int i=0;i<pos;i++)
+    {
+        if(text[i]=='\n'){
+            ln++;
+            flg= i;
+        }
+    }
+
+    flg++;
+    col=pos-flg;
+
+    statusCursorLabel.setText("Ln："+QString::number(ln+1)+"    Col："+QString::number(col+1));
+}
+
+
+void MainWindow::on_actionShowLineNumber_triggered()
+{
+    ui->textEditor->hideLineNumberArea();
 }
 

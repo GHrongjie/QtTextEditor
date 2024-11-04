@@ -31,7 +31,7 @@
      <number>1</number>
     </property>
     <item>
-     <widget class="QPlainTextEdit" name="textEditor"/>
+     <widget class="CodeEditor" name="textEditor"/>
     </item>
    </layout>
   </widget>
@@ -87,6 +87,7 @@
     </property>
     <addaction name="actiontoolsbar"/>
     <addaction name="actionStatebar"/>
+    <addaction name="actionShowLineNumber"/>
    </widget>
    <widget class="QMenu" name="menu_H">
     <property name="title">
@@ -131,6 +132,7 @@
    <addaction name="separator"/>
    <addaction name="actiontoolsbar"/>
    <addaction name="actionStatebar"/>
+   <addaction name="actionShowLineNumber"/>
    <addaction name="separator"/>
   </widget>
   <action name="actionNew">
@@ -464,7 +466,29 @@
     <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
+  <action name="actionShowLineNumber">
+   <property name="icon">
+    <iconset resource="res.qrc">
+     <normaloff>:/icons/lineNumber.png</normaloff>:/icons/lineNumber.png</iconset>
+   </property>
+   <property name="text">
+    <string>显示行号</string>
+   </property>
+   <property name="toolTip">
+    <string>显示行号</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::MenuRole::NoRole</enum>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CodeEditor</class>
+   <extends>QPlainTextEdit</extends>
+   <header location="global">codeeditor.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="res.qrc"/>
  </resources>
