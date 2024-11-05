@@ -47,7 +47,10 @@ void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
 void CodeEditor::hideLineNumberArea()
 {
     bool visible=lineNumberArea->isVisible();
-    lineNumberArea->setVisible(visible);
+    if(visible)
+        lineNumberArea->hide();
+    else
+        lineNumberArea->show();
 }
 
 void CodeEditor::resizeEvent(QResizeEvent *e)

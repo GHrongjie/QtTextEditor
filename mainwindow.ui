@@ -80,6 +80,7 @@
     <addaction name="actionFontBackgroundColor"/>
     <addaction name="actionBackgroundColor"/>
     <addaction name="actionLineWrap"/>
+    <addaction name="actionShowLineNumber"/>
    </widget>
    <widget class="QMenu" name="menu_V">
     <property name="title">
@@ -87,7 +88,6 @@
     </property>
     <addaction name="actiontoolsbar"/>
     <addaction name="actionStatebar"/>
-    <addaction name="actionShowLineNumber"/>
    </widget>
    <widget class="QMenu" name="menu_H">
     <property name="title">

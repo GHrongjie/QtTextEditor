@@ -16,6 +16,7 @@ SearchDialog::~SearchDialog()
     delete ui;
 }
 
+//下一个查找
 void SearchDialog::on_btnNext_clicked()
 {
     QString target = ui->lineEditFind->text();

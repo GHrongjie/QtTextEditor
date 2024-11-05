@@ -16,6 +16,7 @@ ReplaceDialog::~ReplaceDialog()
     delete ui;
 }
 
+//下一个查找
 void ReplaceDialog::on_btnNext_clicked()
 {
     QString target = ui->lineEditFind->text();
@@ -58,7 +59,7 @@ void ReplaceDialog::on_btnNext_clicked()
     }
 }
 
-
+//替换
 void ReplaceDialog::on_btnReplace_clicked()
 {
     QString target = ui->lineEditFind->text();
@@ -71,7 +72,7 @@ void ReplaceDialog::on_btnReplace_clicked()
         pTextEdit->insertPlainText(to);
 }
 
-
+//全部替换
 void ReplaceDialog::on_btnReplaceAll_clicked()
 {
     QString target = ui->lineEditFind->text();

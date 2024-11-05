@@ -74,7 +74,7 @@ void MainWindow::on_actionReplace_triggered()
 
 }
 
-
+//新建文本
 void MainWindow::on_actionNew_triggered()
 {
     if(!userEdiitConfirmed())
@@ -88,7 +88,7 @@ void MainWindow::on_actionNew_triggered()
     textChanged=false;
 }
 
-
+//打开文本
 void MainWindow::on_actionOpen_triggered()
 {
     if(!userEdiitConfirmed())
@@ -114,7 +114,7 @@ void MainWindow::on_actionOpen_triggered()
     textChanged=false;
 }
 
-
+//保存文本
 void MainWindow::on_actionSave_triggered()
 {
     if(filePath==""){
@@ -141,7 +141,7 @@ void MainWindow::on_actionSave_triggered()
     textChanged = false;
 }
 
-
+//另存为
 void MainWindow::on_actionSaveAs_triggered()
 {
     QString filename =QFileDialog::getSaveFileName(this,"保存文件",".",tr("Text files (*.txt) "));
@@ -201,56 +201,75 @@ bool MainWindow::userEdiitConfirmed()
     return true;
 }
 
-
+//撤销
 void MainWindow::on_actionUndo_triggered()
 {
     ui->textEditor->undo();
 }
 
+//恢复
 void MainWindow::on_actionRedo_triggered()
 {
     ui->textEditor->redo();
 }
 
+//剪切
 void MainWindow::on_actionCut_triggered()
 {
     ui->textEditor->cut();
     ui->actionPaste->setEnabled(true);
 }
 
-
+//复制
 void MainWindow::on_actionCopy_triggered()
 {
     ui->textEditor->copy();
     ui->actionPaste->setEnabled(true);
 }
 
-
+//粘贴
 void MainWindow::on_actionPaste_triggered()
 {
     ui->textEditor->paste();
 }
 
+//全选
+void MainWindow::on_actionSelectAll_triggered()
+{
+    ui->textEditor->selectAll();
+}
 
+//可否复制剪切
 void MainWindow::on_textEditor_copyAvailable(bool b)
 {
     ui->actionCopy->setEnabled(b);
     ui->actionCut->setEnabled(b);
 }
 
-
+//可否恢复
 void MainWindow::on_textEditor_redoAvailable(bool b)
 {
     ui->actionRedo->setEnabled(b);
 }
 
-
+//可否撤销
 void MainWindow::on_textEditor_undoAvailable(bool b)
 {
     ui->actionUndo->setEnabled(b);
 }
 
+//设置字体
+void MainWindow::on_actionFont_triggered()
+{
+    bool ok=false;
+    QFont font = QFontDialog::getFont(&ok,this);
 
+    if(ok){
+        ui->textEditor->setFont(font);
+    }
+}
+
+//设置字体颜色
 void MainWindow::on_actionFontColor_triggered()
 {
     QColor color = QColorDialog::getColor(Qt::black,this,"选择颜色");
@@ -259,13 +278,7 @@ void MainWindow::on_actionFontColor_triggered()
     }
 }
 
-
-void MainWindow::on_actionFontBackgroundColor_triggered()
-{
-
-}
-
-
+//设置编辑器背景色
 void MainWindow::on_actionBackgroundColor_triggered()
 {
     QColor color = QColorDialog::getColor(Qt::black,this,"选择颜色");
@@ -274,7 +287,7 @@ void MainWindow::on_actionBackgroundColor_triggered()
     }
 }
 
-
+//自动换行
 void MainWindow::on_actionLineWrap_triggered()
 {
     QPlainTextEdit::LineWrapMode mode = ui->textEditor->lineWrapMode();
@@ -290,18 +303,12 @@ void MainWindow::on_actionLineWrap_triggered()
     }
 }
 
-
-void MainWindow::on_actionFont_triggered()
+void MainWindow::on_actionFontBackgroundColor_triggered()
 {
-    bool ok=false;
-    QFont font = QFontDialog::getFont(&ok,this);
 
-    if(ok){
-        ui->textEditor->setFont(font);
-    }
 }
 
-
+//显示工具栏
 void MainWindow::on_actiontoolsbar_triggered()
 {
     bool visable = ui->toolBar->isVisible();
@@ -309,18 +316,12 @@ void MainWindow::on_actiontoolsbar_triggered()
     ui->actiontoolsbar->setChecked(!visable);
 }
 
-
+//显示状态栏
 void MainWindow::on_actionStatebar_triggered()
 {
     bool visable = ui->statusbar->isVisible();
     ui->statusbar->setVisible(!visable);
     ui->actionStatebar->setChecked(!visable);
-}
-
-
-void MainWindow::on_actionSelectAll_triggered()
-{
-    ui->textEditor->selectAll();
 }
 
 
@@ -330,7 +331,7 @@ void MainWindow::on_actionExit_triggered()
         exit(0);
 }
 
-
+//状态栏更新
 void MainWindow::on_textEditor_cursorPositionChanged()
 {
     int col=0;
